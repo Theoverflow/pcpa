@@ -1,0 +1,7 @@
+- name: Restart PostgreSQL
+  community.docker.docker_container:
+    name: "{{ item }}"
+    state: restarted
+  loop:
+    - postgres_primary
+    - postgres_replica

@@ -1,0 +1,36 @@
+-- Create metadata table
+CREATE TABLE IF NOT EXISTS file_metadata (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  version TEXT NOT NULL,
+  model TEXT,
+  date DATE NOT NULL,
+  status file_status_enum NOT NULL,
+  UNIQUE (name, version)
+);
+
+-- Enum for status
+DO $$ BEGIN
+  CREATE TYPE file_status_enum AS ENUM ('enabled','outdated','disabled');
+EXCEPTION WHEN duplicate_object THEN null; END $$;
+
+-- Create data table partitioned by date (year)
+CREATE TABLE IF NOT EXISTS file_data (
+  id SERIAL,
+  file_id INTEGER NOT NULL REFERENCES file_metadata(id),
+  row_index INTEGER NOT NULL,
+  -- float columns
+  {% for i in range(1, 31) %}col{{ i }} DOUBLE PRECISION{% if not loop.last %},{% endif %}
+  {% endfor %}
+) PARTITION BY RANGE ((SELECT EXTRACT(YEAR FROM m.date) FROM file_metadata m WHERE m.id = file_id));
+
+-- Create yearly partitions
+{% for year in range(2020, 2031) %}
+CREATE TABLE IF NOT EXISTS file_data_{{ year }} PARTITION OF file_data
+  FOR VALUES FROM ({{ year }}) TO ({{ year + 1 }});
+{% endfor %}
+
+-- Indexes
+CREATE INDEX IF NOT EXISTS idx_filedata_fileid ON file_data(file_id);
+CREATE INDEX IF NOT EXISTS idx_metadata_status_version ON file_metadata(status, version);
+CREATE INDEX IF NOT EXISTS idx_metadata_name ON file_metadata(name);

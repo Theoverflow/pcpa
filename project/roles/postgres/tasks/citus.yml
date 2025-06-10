@@ -1,0 +1,14 @@
+- name: Enable Citus extension on primary
+  community.postgresql.postgresql_ext:
+    name: citus
+    db: mydb
+    login_user: myuser
+    login_password: mypass
+
+- name: Distribute tables for sharding
+  community.postgresql.postgresql_query:
+    db: mydb
+    login_user: myuser
+    login_password: mypass
+    query: |
+      SELECT create_distributed_table('file_data', 'file_id');

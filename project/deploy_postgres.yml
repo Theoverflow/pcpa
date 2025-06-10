@@ -1,0 +1,11 @@
+- name: Deploy PostgreSQL Cluster (OLTP + OLAP)
+  hosts: db_servers_primary
+  become: yes
+  roles:
+    - postgres
+
+- name: Deploy Replica for OLAP
+  hosts: db_servers_replica
+  become: yes
+  roles:
+    - { role: postgres, tags: ['replica'] }

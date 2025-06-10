@@ -1,0 +1,20 @@
+- name: Setup standby container for OLAP (replica)
+  community.docker.docker_container:
+    name: postgres_replica
+    image: postgres:15
+    state: started
+    restart_policy: unless-stopped
+    env:
+      POSTGRES_DB: mydb
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypass
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - replica-data:/var/lib/postgresql/data/pgdata
+    command: >
+      bash -c "\
+        rm -rf /var/lib/postgresql/data/pgdata/* && \
+        pg_basebackup -h postgres_primary -D /var/lib/postgresql/data/pgdata -U postgres -vP --wal-method=stream && \
+        echo "standby_mode = 'on'" > /var/lib/postgresql/data/pgdata/recovery.conf && \
+        echo "primary_conninfo = 'host=postgres_primary port=5432 user=postgres password=mypass'" >> /var/lib/postgresql/data/pgdata/recovery.conf && \
+        postgres -c config_file=/etc/postgresql/postgresql.conf"

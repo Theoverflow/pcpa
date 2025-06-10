@@ -1,0 +1,22 @@
+- name: Ensure pgBackRest repo directory
+  file:
+    path: /var/lib/pgbackrest/repo
+    state: directory
+    owner: postgres
+    group: postgres
+    mode: '0750'
+
+- name: Schedule pgBackRest full backup (daily at 2am)
+  cron:
+    name: "Daily pgBackRest backup"
+    user: postgres
+    minute: '0'
+    hour: '2'
+    job: "/usr/bin/pgbackrest --stanza=main --type=full backup"
+
+- name: Schedule pgBackRest archive-push
+  lineinfile:
+    path: /etc/postgresql/postgresql.conf
+    regexp: '^archive_command'
+    line: "archive_command = 'pgbackrest --stanza=main archive-push %p'"
+  notify: Restart PostgreSQL

@@ -1,0 +1,52 @@
+pipeline {
+  agent any
+
+  environment {
+    PYPI_CREDS = credentials('pypi-token')
+    DOCKERHUB_CRED = credentials('dockerhub')
+  }
+
+  stages {
+    stage('Checkout') {
+      steps { checkout scm }
+    }
+    stage('Setup') {
+      steps {
+        sh 'python3 -m venv venv'
+        sh './venv/bin/pip install -r requirements.txt pytest flake8 build'
+      }
+    }
+    stage('Lint') {
+      steps { sh './venv/bin/flake8 src tests' }
+    }
+    stage('Test') {
+      steps { sh './venv/bin/pytest --maxfail=1 --disable-warnings -q' }
+    }
+    stage('Package') {
+      steps { sh './venv/bin/python -m build' }
+    }
+    stage('Publish PyPI') {
+      when { branch 'main' }
+      steps {
+        withCredentials([string(credentialsId: 'pypi-token', variable: 'TOKEN')]) {
+          sh "./venv/bin/twine upload -u __token__ -p $TOKEN dist/*"
+        }
+      }
+    }
+    stage('Docker Build & Push') {
+      steps {
+        sh 'docker build -t myorg/my-python-app:$BUILD_NUMBER .'
+        script {
+          docker.withRegistry('', 'dockerhub') {
+            docker.image("myorg/my-python-app:$BUILD_NUMBER").push()
+          }
+        }
+      }
+    }
+  }
+
+  post {
+    success { echo 'Python CI/CD succeeded.' }
+    failure { echo 'Python CI/CD failed.' }
+  }
+}

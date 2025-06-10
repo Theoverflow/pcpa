@@ -1,0 +1,11 @@
+# Credentials and hosts
+postgres_env:
+  POSTGRES_DB: mydb
+  POSTGRES_USER: myuser
+  POSTGRES_PASSWORD: mypass
+
+# Volumes
+data_volume: data-volume
+backup_volume: backup-volume
+wal_archive_volume: wal-archive
+replica_data_volume: replica-data

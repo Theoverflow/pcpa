@@ -1,0 +1,21 @@
+- include_tasks: configure.yml
+- include_tasks: schema.yml
+- include_tasks: backup.yml
+- include_tasks: replication.yml
+- include_tasks: citus.yml
+
+- name: Deploy Postgres container (primary)
+  community.docker.docker_container:
+    name: postgres_primary
+    image: postgres:{{ postgres_version }}
+    state: started
+    restart_policy: unless-stopped
+    env: "{{ postgres_env }}"
+    volumes:
+      - "{{ data_volume }}:/var/lib/postgresql/data/pgdata"
+      - "/etc/postgresql/postgresql.conf:/etc/postgresql/postgresql.conf"
+      - "/etc/postgresql/pg_hba.conf:/etc/postgresql/pg_hba.conf"
+      - "{{ backup_volume }}:/var/lib/pgbackrest/repo"
+      - "{{ wal_archive_volume }}:/var/lib/postgresql/wal_archive"
+    ports:
+      - "5432:5432"

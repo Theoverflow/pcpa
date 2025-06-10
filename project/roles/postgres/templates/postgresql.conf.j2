@@ -1,0 +1,26 @@
+# CONNECTIONS AND RESOURCE USAGE
+shared_buffers = {{ postgres_shared_buffers | default('2GB') }}
+effective_cache_size = {{ postgres_effective_cache_size | default('6GB') }}
+maintenance_work_mem = {{ postgres_maintenance_work_mem | default('512MB') }}
+work_mem = {{ postgres_work_mem | default('16MB') }}
+max_connections = {{ postgres_max_connections | default(100) }}
+
+# WAL CONFIGURATION
+wal_buffers = {{ postgres_wal_buffers | default('16MB') }}
+max_wal_size = {{ postgres_max_wal_size | default('1GB') }}
+checkpoint_completion_target = {{ postgres_checkpoint_completion_target | default('0.9') }}
+checkpoint_timeout = {{ postgres_checkpoint_timeout | default('15min') }}
+archive_mode = on
+archive_command = 'pgbackrest --stanza=main archive-push %p'
+
+# LOGGING
+log_destination = 'stderr'
+logging_collector = on
+log_directory = 'pg_log'
+log_filename = 'postgresql-%Y-%m-%d_%H%M%S.log'
+
+# JIT
+jit = on
+
+# PARTITION PRUNING
+constraint_exclusion = partition
