@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>My New Hugo Site</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Service Delivery Handbook: Hybrid Multi-Cloud Tableau Analytics Platform
+This handbook provides detailed step-by-step procedures for engineering and operations teams implementing the hybrid multi-cloud analytics solution. It covers infrastructure provisioning, networking, security, microservices deployment, data pipelines, and monitoring.
+
+Table of Contents
+
+Prerequisites &amp; Environment Setup
+Networking &amp; Connectivity
+Kubernetes Bastion Hosts
+API Gateway &amp; Service Mesh
+Transversal Microservices (Kafka, Chef, Redis)
+Containerizing &amp; Deploying Tableau
+Data Ingestion Pipelines
+Cloud Data Lake &amp; Query Engine
+CI/CD &amp; GitOps Automation
+Observability, Logging &amp; Backup
+Operational Runbooks
+
+
+1. Prerequisites &amp; Environment Setup
+
+Accounts &amp; Permissions
+
+Ensure AWS, Azure, and GCP accounts with:
+
+Admin/API access for Terraform
+IAM roles/service principals preconfigured
+
+
+On-prem credentials for MySQL and Vertica database admin
+
+
+Tooling
+
+Install:
+
+Terraform v1.4&#43;
+kubectl v1.26&#43;
+Helm v3.9&#43;
+Docker CLI v24&#43;
+AWS CLI, Azure CLI, gcloud SDK
+Git, Vault CLI
+
+
+
+
+Code Repositories
+
+Git repositories for:
+
+Infrastructure-as-Code (Terraform modules)
+Kubernetes manifests &amp; Helm charts
+Data-pipeline configs (NiFi, Debezium)
+
+
+Branching strategy: main, dev, feature/*
+
+
+Secret Management
+
+Vault cluster with KV v2 mounted at secret/data/hybrid-platform
+Store DB credentials, cloud API tokens, TLS certs.
+
+
+
+
+2. Networking &amp; Connectivity
+2.1 On-Prem to Cloud VPN
+
+
+AWS VPN Setup (similar for Azure ExpressRoute, GCP Interconnect):">
+    <meta name="generator" content="Hugo 0.147.9">
+    
+    
+    
+      <meta name="robots" content="index, follow">
+    
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.8d048772ae72ab11245a0e296d1f2a36d3e3dd376c6c867394d6cc659c68fc37.css" >
+
+
+
+
+    
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="https://example.org/hybrid-cloud-analytics-pipeline_2/">
+    
+
+    <meta property="og:url" content="https://example.org/hybrid-cloud-analytics-pipeline_2/">
+  <meta property="og:site_name" content="My New Hugo Site">
+  <meta property="og:title" content="My New Hugo Site">
+  <meta property="og:description" content="Service Delivery Handbook: Hybrid Multi-Cloud Tableau Analytics Platform This handbook provides detailed step-by-step procedures for engineering and operations teams implementing the hybrid multi-cloud analytics solution. It covers infrastructure provisioning, networking, security, microservices deployment, data pipelines, and monitoring.
+Table of Contents Prerequisites &amp; Environment Setup Networking &amp; Connectivity Kubernetes Bastion Hosts API Gateway &amp; Service Mesh Transversal Microservices (Kafka, Chef, Redis) Containerizing &amp; Deploying Tableau Data Ingestion Pipelines Cloud Data Lake &amp; Query Engine CI/CD &amp; GitOps Automation Observability, Logging &amp; Backup Operational Runbooks 1. Prerequisites &amp; Environment Setup Accounts &amp; Permissions Ensure AWS, Azure, and GCP accounts with: Admin/API access for Terraform IAM roles/service principals preconfigured On-prem credentials for MySQL and Vertica database admin Tooling Install: Terraform v1.4&#43; kubectl v1.26&#43; Helm v3.9&#43; Docker CLI v24&#43; AWS CLI, Azure CLI, gcloud SDK Git, Vault CLI Code Repositories Git repositories for: Infrastructure-as-Code (Terraform modules) Kubernetes manifests &amp; Helm charts Data-pipeline configs (NiFi, Debezium) Branching strategy: main, dev, feature/* Secret Management Vault cluster with KV v2 mounted at secret/data/hybrid-platform Store DB credentials, cloud API tokens, TLS certs. 2. Networking &amp; Connectivity 2.1 On-Prem to Cloud VPN AWS VPN Setup (similar for Azure ExpressRoute, GCP Interconnect):">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+
+  <meta itemprop="name" content="My New Hugo Site">
+  <meta itemprop="description" content="Service Delivery Handbook: Hybrid Multi-Cloud Tableau Analytics Platform This handbook provides detailed step-by-step procedures for engineering and operations teams implementing the hybrid multi-cloud analytics solution. It covers infrastructure provisioning, networking, security, microservices deployment, data pipelines, and monitoring.
+Table of Contents Prerequisites &amp; Environment Setup Networking &amp; Connectivity Kubernetes Bastion Hosts API Gateway &amp; Service Mesh Transversal Microservices (Kafka, Chef, Redis) Containerizing &amp; Deploying Tableau Data Ingestion Pipelines Cloud Data Lake &amp; Query Engine CI/CD &amp; GitOps Automation Observability, Logging &amp; Backup Operational Runbooks 1. Prerequisites &amp; Environment Setup Accounts &amp; Permissions Ensure AWS, Azure, and GCP accounts with: Admin/API access for Terraform IAM roles/service principals preconfigured On-prem credentials for MySQL and Vertica database admin Tooling Install: Terraform v1.4&#43; kubectl v1.26&#43; Helm v3.9&#43; Docker CLI v24&#43; AWS CLI, Azure CLI, gcloud SDK Git, Vault CLI Code Repositories Git repositories for: Infrastructure-as-Code (Terraform modules) Kubernetes manifests &amp; Helm charts Data-pipeline configs (NiFi, Debezium) Branching strategy: main, dev, feature/* Secret Management Vault cluster with KV v2 mounted at secret/data/hybrid-platform Store DB credentials, cloud API tokens, TLS certs. 2. Networking &amp; Connectivity 2.1 On-Prem to Cloud VPN AWS VPN Setup (similar for Azure ExpressRoute, GCP Interconnect):">
+  <meta itemprop="wordCount" content="887">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="My New Hugo Site">
+  <meta name="twitter:description" content="Service Delivery Handbook: Hybrid Multi-Cloud Tableau Analytics Platform This handbook provides detailed step-by-step procedures for engineering and operations teams implementing the hybrid multi-cloud analytics solution. It covers infrastructure provisioning, networking, security, microservices deployment, data pipelines, and monitoring.
+Table of Contents Prerequisites &amp; Environment Setup Networking &amp; Connectivity Kubernetes Bastion Hosts API Gateway &amp; Service Mesh Transversal Microservices (Kafka, Chef, Redis) Containerizing &amp; Deploying Tableau Data Ingestion Pipelines Cloud Data Lake &amp; Query Engine CI/CD &amp; GitOps Automation Observability, Logging &amp; Backup Operational Runbooks 1. Prerequisites &amp; Environment Setup Accounts &amp; Permissions Ensure AWS, Azure, and GCP accounts with: Admin/API access for Terraform IAM roles/service principals preconfigured On-prem credentials for MySQL and Vertica database admin Tooling Install: Terraform v1.4&#43; kubectl v1.26&#43; Helm v3.9&#43; Docker CLI v24&#43; AWS CLI, Azure CLI, gcloud SDK Git, Vault CLI Code Repositories Git repositories for: Infrastructure-as-Code (Terraform modules) Kubernetes manifests &amp; Helm charts Data-pipeline configs (NiFi, Debezium) Branching strategy: main, dev, feature/* Secret Management Vault cluster with KV v2 mounted at secret/data/hybrid-platform Store DB credentials, cloud API tokens, TLS certs. 2. Networking &amp; Connectivity 2.1 On-Prem to Cloud VPN AWS VPN Setup (similar for Azure ExpressRoute, GCP Interconnect):">
+
+      
+    
+	
+  </head><body class="ma0 avenir bg-near-white production">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        My New Hugo Site
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked ttu">
+          
+        My New Hugo Site
+      </aside><div id="sharing" class="mt3 ananke-socials"></div>
+<h1 class="f1 athelas mt3 mb1"></h1>
+      
+      
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h1 id="service-delivery-handbook-hybrid-multi-cloud-tableau-analytics-platform">Service Delivery Handbook: Hybrid Multi-Cloud Tableau Analytics Platform</h1>
+<p>This handbook provides detailed step-by-step procedures for engineering and operations teams implementing the hybrid multi-cloud analytics solution. It covers infrastructure provisioning, networking, security, microservices deployment, data pipelines, and monitoring.</p>
+<hr>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li>Prerequisites &amp; Environment Setup</li>
+<li>Networking &amp; Connectivity</li>
+<li>Kubernetes Bastion Hosts</li>
+<li>API Gateway &amp; Service Mesh</li>
+<li>Transversal Microservices (Kafka, Chef, Redis)</li>
+<li>Containerizing &amp; Deploying Tableau</li>
+<li>Data Ingestion Pipelines</li>
+<li>Cloud Data Lake &amp; Query Engine</li>
+<li>CI/CD &amp; GitOps Automation</li>
+<li>Observability, Logging &amp; Backup</li>
+<li>Operational Runbooks</li>
+</ol>
+<hr>
+<h2 id="1-prerequisites--environment-setup">1. Prerequisites &amp; Environment Setup</h2>
+<ol>
+<li><strong>Accounts &amp; Permissions</strong>
+<ul>
+<li>Ensure AWS, Azure, and GCP accounts with:
+<ul>
+<li>Admin/API access for Terraform</li>
+<li>IAM roles/service principals preconfigured</li>
+</ul>
+</li>
+<li>On-prem credentials for MySQL and Vertica database admin</li>
+</ul>
+</li>
+<li><strong>Tooling</strong>
+<ul>
+<li>Install:
+<ul>
+<li>Terraform v1.4+</li>
+<li>kubectl v1.26+</li>
+<li>Helm v3.9+</li>
+<li>Docker CLI v24+</li>
+<li>AWS CLI, Azure CLI, gcloud SDK</li>
+<li>Git, Vault CLI</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Code Repositories</strong>
+<ul>
+<li>Git repositories for:
+<ul>
+<li>Infrastructure-as-Code (Terraform modules)</li>
+<li>Kubernetes manifests &amp; Helm charts</li>
+<li>Data-pipeline configs (NiFi, Debezium)</li>
+</ul>
+</li>
+<li>Branching strategy: <code>main</code>, <code>dev</code>, <code>feature/*</code></li>
+</ul>
+</li>
+<li><strong>Secret Management</strong>
+<ul>
+<li>Vault cluster with KV v2 mounted at <code>secret/data/hybrid-platform</code></li>
+<li>Store DB credentials, cloud API tokens, TLS certs.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="2-networking--connectivity">2. Networking &amp; Connectivity</h2>
+<h3 id="21-on-prem-to-cloud-vpn">2.1 On-Prem to Cloud VPN</h3>
+<ul>
+<li>
+<p><strong>AWS VPN Setup</strong> (similar for Azure ExpressRoute, GCP Interconnect):</p>
+<ol>
+<li>In AWS Console, create Customer Gateway with on-prem public IP.</li>
+<li>Create Virtual Private Gateway and attach to your VPC.</li>
+<li>Create Site-to-Site VPN connection, download configuration.</li>
+<li>Apply config to on-prem firewall/router.</li>
+<li>Verify tunnel UP: <code>aws ec2 describe-vpn-connections --filters Name=state,Values=available</code></li>
+</ol>
+</li>
+<li>
+<p><strong>Routing</strong>:</p>
+<ul>
+<li>On-prem: route MySQL (10.10.0.0/16) and Vertica (10.20.0.0/16) via VPN.</li>
+<li>Cloud VPC route table: add 0.0.0.0/0 via IGW, and on-prem CIDRs via VGW.</li>
+</ul>
+</li>
+</ul>
+<h3 id="22-security-groups--network-policies">2.2 Security Groups &amp; Network Policies</h3>
+<ul>
+<li><strong>Cloud Security Groups</strong>:
+<ul>
+<li>Allow inbound only from bastion nodes on SSH (22), HTTPS (443).</li>
+<li>Allow K8s ingress on 80/443 for Tableau only.</li>
+</ul>
+</li>
+<li><strong>Kubernetes Network Policies</strong>:
+<ul>
+<li>Deny all ingress/egress by default.</li>
+<li>Allow Tableau namespace to reach DB IPs on ports 3306 (MySQL) and 5433 (Vertica).</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="3-kubernetes-bastion-hosts">3. Kubernetes Bastion Hosts</h2>
+<ol>
+<li><strong>Provision Minimal Clusters</strong>
+<ul>
+<li>Terraform modules to create EKS, AKS, GKE with:
+<ul>
+<li>Node-pool <code>bastion</code>: 1-2 t3.small or B2s nodes.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Deploy SSH DaemonSet</strong>:
+<ul>
+<li>Create <code>bastion</code> namespace.</li>
+<li>DaemonSet manifest (sshd) mounting SSH keys from Vault via CSI driver.</li>
+</ul>
+</li>
+<li><strong>Access Flow</strong>:
+<ul>
+<li>Engineers SSH into bastion via cloud LB.</li>
+<li>From bastion pod: <code>kubectl exec -it tableau-pod -- bash</code>.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="4-api-gateway--service-mesh">4. API Gateway &amp; Service Mesh</h2>
+<h3 id="41-kong-gateway">4.1 Kong Gateway</h3>
+<ol>
+<li><strong>Helm Install</strong>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm repo add kong https://charts.konghq.com
+</span></span><span style="display:flex;"><span>helm install kong kong/kong <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --namespace kong <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --set ingressController.installCRDs<span style="color:#f92672">=</span>false <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --set env.database<span style="color:#f92672">=</span>off <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --set env.proxy_listen<span style="color:#f92672">=</span>0.0.0.0:8000,0.0.0.0:8443 ssl
+</span></span></code></pre></div></li>
+<li><strong>IngressRoute</strong> manifests to route <code>/api/*</code> to microservices.</li>
+</ol>
+<h3 id="42-envoy-service-mesh">4.2 Envoy Service Mesh</h3>
+<ol>
+<li><strong>Istio/Envoy Deployment</strong> via Helm or operator.</li>
+<li><strong>mTLS</strong>: enable strict mutual TLS in peerAuthentication.</li>
+<li><strong>VirtualServices</strong> to route traffic between services.</li>
+</ol>
+<hr>
+<h2 id="5-transversal-microservices">5. Transversal Microservices</h2>
+<h3 id="51-kafka-strimzi">5.1 Kafka (Strimzi)</h3>
+<ol>
+<li><strong>Operator Install</strong>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create namespace kafka
+</span></span><span style="display:flex;"><span>helm repo add strimzi https://strimzi.io/charts/
+</span></span><span style="display:flex;"><span>helm install strimzi strimzi/strimzi-kafka-operator -n kafka
+</span></span></code></pre></div></li>
+<li><strong>KafkaCluster CR</strong> with 3 brokers, Zookeeper nodes.</li>
+<li><strong>Topics</strong>:
+<ul>
+<li><code>db-cdc-mysql</code>, <code>db-batch-vertica</code>, <code>tableau-refresh</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="52-chef-server">5.2 Chef Server</h3>
+<ol>
+<li><strong>Containerized Chef Server</strong>:
+<ul>
+<li>Use official <code>chef/server</code> image.</li>
+<li>PVC for <code>/var/opt/chef-server</code> and <code>/etc/chef-server</code>.</li>
+</ul>
+</li>
+<li><strong>Access</strong> via Kong at <code>chef.company.com</code>.</li>
+<li><strong>Automate Node Bootstrapping</strong> with chef-client pods.</li>
+</ol>
+<h3 id="53-redis-caching">5.3 Redis Caching</h3>
+<ol>
+<li><strong>Helm Install</strong>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm repo add bitnami https://charts.bitnami.com/bitnami
+</span></span><span style="display:flex;"><span>helm install redis bitnami/redis <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --namespace cache <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --set architecture<span style="color:#f92672">=</span>standalone,auth.enabled<span style="color:#f92672">=</span>true
+</span></span></code></pre></div></li>
+<li><strong>Usage</strong>:
+<ul>
+<li>Cache API tokens, session data, query results.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="6-containerizing--deploying-tableau">6. Containerizing &amp; Deploying Tableau</h2>
+<ol>
+<li><strong>Dockerfile</strong> (simplified):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> ubuntu:22.04</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> apt-get update <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    apt-get install -y wget tcsh xvfb libxss1 libnss3<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ADD</span> tableau-server-2023.2.0.deb /tmp/<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> dpkg -i /tmp/tableau-server-*.deb<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># Install MySQL &amp; Vertica drivers</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> drivers/* /opt/tableau/drivers/<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENTRYPOINT</span> [<span style="color:#e6db74">&#34;/opt/tableau/tableau_server/scripts/start-server.sh&#34;</span>]<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div></li>
+<li><strong>Helm Chart</strong>:
+<ul>
+<li><code>values.yaml</code>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">replicaCount</span>: <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">env</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">TABLEAU_AUTH</span>: <span style="color:#e6db74">&#34;${TABLEAU_TOKEN}&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">DB_MYSQL_HOST</span>: <span style="color:#e6db74">&#34;10.10.0.5&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">DB_VERTICA_HOST</span>: <span style="color:#e6db74">&#34;10.20.0.8&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">persistence</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">storageClass</span>: <span style="color:#ae81ff">gp2</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">size</span>: <span style="color:#ae81ff">200Gi</span>
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li><strong>Deploy</strong>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm install tableau ./charts/tableau -n analytics
+</span></span></code></pre></div></li>
+<li><strong>Verify</strong>:
+<ul>
+<li><code>kubectl get pods -n analytics</code> (should show 3 running)</li>
+<li>Access UI via <code>kubectl port-forward svc/tableau 8443:443</code></li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="7-data-ingestion-pipelines">7. Data Ingestion Pipelines</h2>
+<h3 id="71-debezium--kafka-connect-cdc">7.1 Debezium + Kafka Connect (CDC)</h3>
+<ol>
+<li><strong>Connect Cluster</strong>:
+<ul>
+<li>Deploy Kafka Connect pod with Debezium MySQL connector plugin.</li>
+<li>Mount credentials via Vault.</li>
+</ul>
+</li>
+<li><strong>Connector Config</strong> (<code>mysql-source.json</code>):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{ <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;mysql-source&#34;</span>, <span style="color:#f92672">&#34;config&#34;</span>: {
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;connector.class&#34;</span>: <span style="color:#e6db74">&#34;io.debezium.connector.mysql.MySqlConnector&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;database.hostname&#34;</span>: <span style="color:#e6db74">&#34;10.10.0.5&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;database.user&#34;</span>: <span style="color:#e6db74">&#34;dbuser&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;database.password&#34;</span>: <span style="color:#e6db74">&#34;${vault:secret/data/hybrid-platform#mysql-password}&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;database.server.id&#34;</span>: <span style="color:#e6db74">&#34;184054&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;table.include.list&#34;</span>: <span style="color:#e6db74">&#34;sales.*,hr.*&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;topic.prefix&#34;</span>: <span style="color:#e6db74">&#34;db-cdc-&#34;</span>
+</span></span><span style="display:flex;"><span>}}
+</span></span></code></pre></div></li>
+<li><strong>Deploy</strong>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl apply -f mysql-source.json -n kafka
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="72-apache-nifi-batch">7.2 Apache NiFi (Batch)</h3>
+<ol>
+<li><strong>Helm Install</strong> NiFi:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm repo add cetic https://cetic.github.io/helm-nifi
+</span></span><span style="display:flex;"><span>helm install nifi cetic/nifi --namespace ingest
+</span></span></code></pre></div></li>
+<li><strong>NAR Packages</strong> for Vertica used in NiFi.</li>
+<li><strong>Flow</strong>:
+<ul>
+<li><code>GetFile</code> → <code>ConvertAvroToORC</code> → <code>PutHDFS</code> (to S3/ADLS/GCS)</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="8-cloud-data-lake--query-engine">8. Cloud Data Lake &amp; Query Engine</h2>
+<ol>
+<li><strong>Object Storage</strong>:
+<ul>
+<li>AWS S3 buckets with versioning &amp; encryption.</li>
+<li>Azure Data Lake Gen2 containers.</li>
+<li>GCS buckets.</li>
+</ul>
+</li>
+<li><strong>Catalog</strong>:
+<ul>
+<li>Glue Data Catalog / Azure Purview / GCP Data Catalog.</li>
+<li>Use AWS Glue Crawler pointing at <code>s3://hybrid-platform/raw/</code></li>
+</ul>
+</li>
+<li><strong>Query</strong>:
+<ul>
+<li>Athena: Create external tables on Parquet partitions.</li>
+<li>Synapse: Serverless SQL pools.</li>
+<li>BigQuery: Create external tables via federated GCS.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="9-cicd--gitops-automation">9. CI/CD &amp; GitOps Automation</h2>
+<ol>
+<li><strong>Argo CD</strong>:
+<ul>
+<li>Install in <code>gitops</code> namespace.</li>
+<li>Create <code>Application</code> YAMLs pointing to Git repos:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">argoproj.io/v1alpha1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Application</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>: { <span style="color:#f92672">name</span>: <span style="color:#ae81ff">tableau-app }</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">project</span>: <span style="color:#ae81ff">default</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">source</span>: { <span style="color:#f92672">repoURL</span>: <span style="color:#e6db74">&#34;git@github.com:org/hybrid-platform&#34;</span><span style="color:#f92672">, path</span>: <span style="color:#e6db74">&#34;charts/tableau&#34;</span> }
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">destination</span>: { <span style="color:#f92672">server</span>: <span style="color:#e6db74">&#34;https://kubernetes.default.svc&#34;</span><span style="color:#f92672">, namespace</span>: <span style="color:#ae81ff">analytics }</span>
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li><strong>Terraform Cloud/Enterprise</strong>:
+<ul>
+<li>Workspace per cloud.</li>
+<li>Use remote state in S3/Key Vault/GCS.</li>
+<li>Run plans on PRs.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="10-observability-logging--backup">10. Observability, Logging &amp; Backup</h2>
+<ol>
+<li><strong>Prometheus &amp; Grafana</strong>:
+<ul>
+<li>Helm install in <code>monitoring</code> namespace.</li>
+<li>Scrape targets: Kong, Kafka, Tableau, NiFi.</li>
+</ul>
+</li>
+<li><strong>ELK/EFK</strong>:
+<ul>
+<li>Filebeat DaemonSet shipping logs to Elasticsearch.</li>
+</ul>
+</li>
+<li><strong>Backup</strong>:
+<ul>
+<li>Velero for K8s snapshots to object store.</li>
+<li>RDS snapshots and Vertica exports scheduled via cronjobs.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="11-operational-runbooks">11. Operational Runbooks</h2>
+<ul>
+<li><strong>Incident Response</strong>: Steps to triage VPN down, cluster unreachable, Tableau service failure.</li>
+<li><strong>Scaling</strong>: How to add nodes, adjust HPA for Tableau.</li>
+<li><strong>Upgrades</strong>: Rolling upgrade procedure for Helm releases.</li>
+<li><strong>DR Tests</strong>: Quarterly drills for failover between clouds.</li>
+</ul>
+<hr>
+<p><em>End of Service Delivery Handbook</em></p>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="https://example.org/" >
+    &copy;  My New Hugo Site 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

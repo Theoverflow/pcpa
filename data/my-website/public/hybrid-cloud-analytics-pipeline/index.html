@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>My New Hugo Site</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Detailed Implementation Guide
+This document provides detailed, step-by-step implementation instructions for setting up a multi-cloud hybrid analytics platform with:
+
+On-prem MySQL/Vertica cluster
+Kubernetes bastion hosts in AWS (EKS), Azure (AKS), and GCP (GKE)
+Containerized Tableau Server on Kubernetes
+Data ingestion pipelines (Apache NiFi &amp; Debezium/Kafka)
+Cloud data lakes (S3, ADLS Gen2, GCS)
+SQL-on-lake query engines (Athena, Synapse, BigQuery)
+API Gateway &amp; transversal microservices (Kong/Envoy, Kafka, Chef, Redis)
+GitOps-driven CI/CD
+Monitoring, logging, and backup
+
+
+1. Prerequisites
+
+
+On-Prem Environment:">
+    <meta name="generator" content="Hugo 0.147.9">
+    
+    
+    
+      <meta name="robots" content="index, follow">
+    
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.8d048772ae72ab11245a0e296d1f2a36d3e3dd376c6c867394d6cc659c68fc37.css" >
+
+
+
+
+    
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="https://example.org/hybrid-cloud-analytics-pipeline/">
+    
+
+    <meta property="og:url" content="https://example.org/hybrid-cloud-analytics-pipeline/">
+  <meta property="og:site_name" content="My New Hugo Site">
+  <meta property="og:title" content="My New Hugo Site">
+  <meta property="og:description" content="Detailed Implementation Guide This document provides detailed, step-by-step implementation instructions for setting up a multi-cloud hybrid analytics platform with:
+On-prem MySQL/Vertica cluster Kubernetes bastion hosts in AWS (EKS), Azure (AKS), and GCP (GKE) Containerized Tableau Server on Kubernetes Data ingestion pipelines (Apache NiFi &amp; Debezium/Kafka) Cloud data lakes (S3, ADLS Gen2, GCS) SQL-on-lake query engines (Athena, Synapse, BigQuery) API Gateway &amp; transversal microservices (Kong/Envoy, Kafka, Chef, Redis) GitOps-driven CI/CD Monitoring, logging, and backup 1. Prerequisites On-Prem Environment:">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+
+  <meta itemprop="name" content="My New Hugo Site">
+  <meta itemprop="description" content="Detailed Implementation Guide This document provides detailed, step-by-step implementation instructions for setting up a multi-cloud hybrid analytics platform with:
+On-prem MySQL/Vertica cluster Kubernetes bastion hosts in AWS (EKS), Azure (AKS), and GCP (GKE) Containerized Tableau Server on Kubernetes Data ingestion pipelines (Apache NiFi &amp; Debezium/Kafka) Cloud data lakes (S3, ADLS Gen2, GCS) SQL-on-lake query engines (Athena, Synapse, BigQuery) API Gateway &amp; transversal microservices (Kong/Envoy, Kafka, Chef, Redis) GitOps-driven CI/CD Monitoring, logging, and backup 1. Prerequisites On-Prem Environment:">
+  <meta itemprop="wordCount" content="690">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="My New Hugo Site">
+  <meta name="twitter:description" content="Detailed Implementation Guide This document provides detailed, step-by-step implementation instructions for setting up a multi-cloud hybrid analytics platform with:
+On-prem MySQL/Vertica cluster Kubernetes bastion hosts in AWS (EKS), Azure (AKS), and GCP (GKE) Containerized Tableau Server on Kubernetes Data ingestion pipelines (Apache NiFi &amp; Debezium/Kafka) Cloud data lakes (S3, ADLS Gen2, GCS) SQL-on-lake query engines (Athena, Synapse, BigQuery) API Gateway &amp; transversal microservices (Kong/Envoy, Kafka, Chef, Redis) GitOps-driven CI/CD Monitoring, logging, and backup 1. Prerequisites On-Prem Environment:">
+
+      
+    
+	
+  </head><body class="ma0 avenir bg-near-white production">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        My New Hugo Site
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  
+  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked ttu">
+          
+        My New Hugo Site
+      </aside><div id="sharing" class="mt3 ananke-socials"></div>
+<h1 class="f1 athelas mt3 mb1"></h1>
+      
+      
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h2 id="detailed-implementation-guide">Detailed Implementation Guide</h2>
+<p>This document provides detailed, step-by-step implementation instructions for setting up a multi-cloud hybrid analytics platform with:</p>
+<ul>
+<li>On-prem MySQL/Vertica cluster</li>
+<li>Kubernetes bastion hosts in AWS (EKS), Azure (AKS), and GCP (GKE)</li>
+<li>Containerized Tableau Server on Kubernetes</li>
+<li>Data ingestion pipelines (Apache NiFi &amp; Debezium/Kafka)</li>
+<li>Cloud data lakes (S3, ADLS Gen2, GCS)</li>
+<li>SQL-on-lake query engines (Athena, Synapse, BigQuery)</li>
+<li>API Gateway &amp; transversal microservices (Kong/Envoy, Kafka, Chef, Redis)</li>
+<li>GitOps-driven CI/CD</li>
+<li>Monitoring, logging, and backup</li>
+</ul>
+<hr>
+<h3 id="1-prerequisites">1. Prerequisites</h3>
+<ol>
+<li>
+<p><strong>On-Prem Environment:</strong></p>
+<ul>
+<li>MySQL v8+ with binlog enabled (for CDC)</li>
+<li>Vertica v10+ accessible via JDBC</li>
+<li>Network firewall rules allowing outbound to cloud VPN endpoints</li>
+</ul>
+</li>
+<li>
+<p><strong>Cloud Accounts:</strong></p>
+<ul>
+<li>AWS, Azure, GCP accounts with permissions to create VPCs/VNets, K8s clusters, IAM roles, storage</li>
+</ul>
+</li>
+<li>
+<p><strong>Tools Installed Locally:</strong></p>
+<ul>
+<li>Terraform v1.4+</li>
+<li>kubectl v1.25+</li>
+<li>Helm v3.8+</li>
+<li>AWS CLI, Azure CLI, gcloud SDK</li>
+<li>Git</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="2-networking--vpn-setup">2. Networking &amp; VPN Setup</h3>
+<h4 id="21-aws-site-to-site-vpn">2.1 AWS Site-to-Site VPN</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-hcl" data-lang="hcl"><span style="display:flex;"><span><span style="color:#75715e"># terraform/aws/vpn.tf
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">provider</span> <span style="color:#e6db74">&#34;aws&#34;</span> {
+</span></span><span style="display:flex;"><span>  region <span style="color:#f92672">=</span> <span style="color:#66d9ef">var</span>.<span style="color:#66d9ef">aws_region</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;aws_vpc&#34; &#34;main&#34;</span> {
+</span></span><span style="display:flex;"><span>  cidr_block <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;10.0.0.0/16&#34;</span>
+</span></span><span style="display:flex;"><span>  tags <span style="color:#f92672">=</span> { Name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hybrid-vpc&#34;</span> }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;aws_customer_gateway&#34; &#34;onprem&#34;</span> {
+</span></span><span style="display:flex;"><span>  bgp_asn    <span style="color:#f92672">=</span> <span style="color:#ae81ff">65000</span>
+</span></span><span style="display:flex;"><span>  ip_address <span style="color:#f92672">=</span> <span style="color:#66d9ef">var</span>.<span style="color:#66d9ef">onprem_static_ip</span>
+</span></span><span style="display:flex;"><span>  type       <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ipsec.1&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;aws_vpn_gateway&#34; &#34;vgw&#34;</span> {
+</span></span><span style="display:flex;"><span>  vpc_id <span style="color:#f92672">=</span> <span style="color:#66d9ef">aws_vpc</span>.<span style="color:#66d9ef">main</span>.<span style="color:#66d9ef">id</span>
+</span></span><span style="display:flex;"><span>  tags   <span style="color:#f92672">=</span> { Name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;vgw&#34;</span> }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;aws_vpn_connection&#34; &#34;vpn&#34;</span> {
+</span></span><span style="display:flex;"><span>  customer_gateway_id <span style="color:#f92672">=</span> <span style="color:#66d9ef">aws_customer_gateway</span>.<span style="color:#66d9ef">onprem</span>.<span style="color:#66d9ef">id</span>
+</span></span><span style="display:flex;"><span>  vpn_gateway_id      <span style="color:#f92672">=</span> <span style="color:#66d9ef">aws_vpn_gateway</span>.<span style="color:#66d9ef">vgw</span>.<span style="color:#66d9ef">id</span>
+</span></span><span style="display:flex;"><span>  type                <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ipsec.1&#34;</span>
+</span></span><span style="display:flex;"><span>  static_routes_only  <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;aws_vpn_connection_route&#34; &#34;route&#34;</span> {
+</span></span><span style="display:flex;"><span>  count                <span style="color:#f92672">=</span> <span style="color:#66d9ef">length</span>(<span style="color:#66d9ef">var</span>.<span style="color:#66d9ef">onprem_cidrs</span>)
+</span></span><span style="display:flex;"><span>  vpn_connection_id    <span style="color:#f92672">=</span> <span style="color:#66d9ef">aws_vpn_connection</span>.<span style="color:#66d9ef">vpn</span>.<span style="color:#66d9ef">id</span>
+</span></span><span style="display:flex;"><span>  destination_cidr_block <span style="color:#f92672">=</span> <span style="color:#66d9ef">var</span>.<span style="color:#66d9ef">onprem_cidrs</span>[<span style="color:#66d9ef">count</span>.<span style="color:#66d9ef">index</span>]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="22-azure--gcp-connectivity">2.2 Azure &amp; GCP Connectivity</h4>
+<ul>
+<li>Use <code>azurerm_virtual_network_gateway</code>, <code>azurerm_local_network_gateway</code>, and <code>azurerm_virtual_network_gateway_connection</code> for Azure.</li>
+<li>Use <code>google_compute_vpn_gateway</code>, <code>google_compute_vpn_tunnel</code> in Terraform for GCP.</li>
+</ul>
+<hr>
+<h3 id="3-kubernetes-cluster-provisioning">3. Kubernetes Cluster Provisioning</h3>
+<h4 id="31-aws-eks-with-terraform">3.1 AWS EKS with Terraform</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-hcl" data-lang="hcl"><span style="display:flex;"><span><span style="color:#75715e"># terraform/aws/eks.tf
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">module</span> <span style="color:#e6db74">&#34;eks&#34;</span> {
+</span></span><span style="display:flex;"><span>  source          <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;terraform-aws-modules/eks/aws&#34;</span>
+</span></span><span style="display:flex;"><span>  cluster_name    <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hybrid-eks&#34;</span>
+</span></span><span style="display:flex;"><span>  cluster_version <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1.25&#34;</span>
+</span></span><span style="display:flex;"><span>  subnets         <span style="color:#f92672">=</span> <span style="color:#66d9ef">aws_subnet</span>.<span style="color:#66d9ef">private</span>.<span style="color:#960050;background-color:#1e0010">*</span>.<span style="color:#66d9ef">id</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  node_groups <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    bastion <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>      desired_capacity <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>      instance_type    <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;t3.small&#34;</span>
+</span></span><span style="display:flex;"><span>      labels <span style="color:#f92672">=</span> { role <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;bastion&#34;</span> }
+</span></span><span style="display:flex;"><span>      ssh_key_name <span style="color:#f92672">=</span> <span style="color:#66d9ef">var</span>.<span style="color:#66d9ef">ssh_key</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    worker <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>      desired_capacity <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>      instance_type    <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;t3.medium&#34;</span>
+</span></span><span style="display:flex;"><span>      labels <span style="color:#f92672">=</span> { role <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;app&#34;</span> }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="32-azure-aks">3.2 Azure AKS</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-hcl" data-lang="hcl"><span style="display:flex;"><span><span style="color:#75715e"># terraform/azure/aks.tf
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;azurerm_kubernetes_cluster&#34; &#34;aks&#34;</span> {
+</span></span><span style="display:flex;"><span>  name                <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hybrid-aks&#34;</span>
+</span></span><span style="display:flex;"><span>  location            <span style="color:#f92672">=</span> <span style="color:#66d9ef">var</span>.<span style="color:#66d9ef">azure_region</span>
+</span></span><span style="display:flex;"><span>  resource_group_name <span style="color:#f92672">=</span> <span style="color:#66d9ef">azurerm_resource_group</span>.<span style="color:#66d9ef">rg</span>.<span style="color:#66d9ef">name</span>
+</span></span><span style="display:flex;"><span>  dns_prefix          <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hybrid&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">default_node_pool</span> {
+</span></span><span style="display:flex;"><span>    name       <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;nodepool&#34;</span>
+</span></span><span style="display:flex;"><span>    node_count <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>    vm_size    <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Standard_DS2_v2&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">identity</span> {
+</span></span><span style="display:flex;"><span>    type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;SystemAssigned&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="33-gcp-gke">3.3 GCP GKE</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-hcl" data-lang="hcl"><span style="display:flex;"><span><span style="color:#75715e"># terraform/gcp/gke.tf
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;google_container_cluster&#34; &#34;gke&#34;</span> {
+</span></span><span style="display:flex;"><span>  name               <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hybrid-gke&#34;</span>
+</span></span><span style="display:flex;"><span>  location           <span style="color:#f92672">=</span> <span style="color:#66d9ef">var</span>.<span style="color:#66d9ef">gcp_region</span>
+</span></span><span style="display:flex;"><span>  initial_node_count <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  network    <span style="color:#f92672">=</span> <span style="color:#66d9ef">google_compute_network</span>.<span style="color:#66d9ef">vpc</span>.<span style="color:#66d9ef">self_link</span>
+</span></span><span style="display:flex;"><span>  subnetwork <span style="color:#f92672">=</span> <span style="color:#66d9ef">google_compute_subnetwork</span>.<span style="color:#66d9ef">subnet</span>.<span style="color:#66d9ef">self_link</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">node_config</span> {
+</span></span><span style="display:flex;"><span>    machine_type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;e2-medium&#34;</span>
+</span></span><span style="display:flex;"><span>    oauth_scopes <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;https://www.googleapis.com/auth/cloud-platform&#34;</span>]
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h3 id="4-bastion-setup--ssh-access">4. Bastion Setup &amp; SSH Access</h3>
+<ol>
+<li>Label bastion nodes: <code>kubectl label nodes -l role=bastion bastion=true</code>.</li>
+<li>Deploy SSH DaemonSet:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">DaemonSet</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">ssh-bastion</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">kube-system</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">matchLabels</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">ssh-bastion</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">template</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">ssh-bastion</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">nodeSelector</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">bastion</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">sshd</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">linuxserver/openssh-server</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">env</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">PUID</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;1000&#34;</span>
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">PGID</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;1000&#34;</span>
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">TZ</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;UTC&#34;</span>
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">PUBLIC_KEY</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">valueFrom</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">secretKeyRef</span>:
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">name</span>: <span style="color:#ae81ff">ssh-keys</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">key</span>: <span style="color:#ae81ff">public</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">hostPort</span>: <span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">tolerations</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">key</span>: <span style="color:#e6db74">&#34;node-role.kubernetes.io/master&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">operator</span>: <span style="color:#e6db74">&#34;Exists&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">effect</span>: <span style="color:#e6db74">&#34;NoSchedule&#34;</span>
+</span></span></code></pre></div><ol start="3">
+<li>Create <code>ssh-keys</code> secret with your public key.</li>
+</ol>
+<hr>
+<h3 id="5-api-gateway--transversal-microservices">5. API Gateway &amp; Transversal Microservices</h3>
+<p>To provide unified ingress, routing, and shared services across clouds:</p>
+<h4 id="51-api-gateway-kong--envoy">5.1 API Gateway (Kong + Envoy)</h4>
+<ol>
+<li><strong>Deploy Kong Gateway</strong> via Helm:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm repo add kong https://charts.konghq.com
+</span></span><span style="display:flex;"><span>helm install kong-gateway kong/kong <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --namespace kong-system --create-namespace <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --set ingressController.installCRDs<span style="color:#f92672">=</span>true
+</span></span></code></pre></div></li>
+<li><strong>Expose Gateway</strong> with a LoadBalancer service. Configure DNS for a common API endpoint per cloud.</li>
+<li><strong>Envoy Sidecar</strong> (optional) via Istio/Linkerd for mTLS and advanced routing.</li>
+</ol>
+<h4 id="52-kafka-strimzi-operator">5.2 Kafka (Strimzi Operator)</h4>
+<ol>
+<li><strong>Install Strimzi</strong>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create namespace kafka
+</span></span><span style="display:flex;"><span>helm repo add strimzi https://strimzi.io/charts/
+</span></span><span style="display:flex;"><span>helm install strimzi-kafka strimzi/strimzi-kafka-operator --namespace kafka
+</span></span></code></pre></div></li>
+<li><strong>Kafka Cluster CR</strong>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">kafka.strimzi.io/v1beta2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Kafka</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">hybrid-kafka</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">kafka</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">kafka</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">listeners</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">plain</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">port</span>: <span style="color:#ae81ff">9092</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">type</span>: <span style="color:#ae81ff">internal</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">storage</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">type</span>: <span style="color:#ae81ff">ephemeral</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">zookeeper</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">storage</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">type</span>: <span style="color:#ae81ff">ephemeral</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">entityOperator</span>: {}
+</span></span></code></pre></div></li>
+</ol>
+<h4 id="53-chef-configuration-management">5.3 Chef (Configuration Management)</h4>
+<ol>
+<li><strong>Deploy Chef Server</strong> container:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create namespace chef
+</span></span><span style="display:flex;"><span>kubectl apply -f https://raw.githubusercontent.com/chef/chef-server/master/deploy/k8s/chef-server-deployment.yaml
+</span></span></code></pre></div></li>
+<li><strong>Bootstrap Nodes</strong>: use <code>knife bootstrap</code> to register Kubernetes nodes and on-prem VMs.</li>
+<li><strong>Cookbooks &amp; Policies</strong>: store in Git and automate via Chef Automate.</li>
+</ol>
+<h4 id="54-redis-caching--session-store">5.4 Redis (Caching &amp; Session Store)</h4>
+<ol>
+<li><strong>Install Redis</strong> via Bitnami Helm chart:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm repo add bitnami https://charts.bitnami.com/bitnami
+</span></span><span style="display:flex;"><span>helm install redis-cache bitnami/redis --namespace data-services
+</span></span></code></pre></div></li>
+<li><strong>Access</strong>: expose internally via ClusterIP; restrict with NetworkPolicies.</li>
+<li><strong>Use Cases</strong>: caching query results, session tokens, leaderboards for dashboard metadata.</li>
+</ol>
+<hr>
+<h3 id="6-containerizing--deploying-tableau-server">6. Containerizing &amp; Deploying Tableau Server</h3>
+<p><em>(next sections…)</em></p>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="https://example.org/" >
+    &copy;  My New Hugo Site 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
