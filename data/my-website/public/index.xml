@@ -1,32 +1,129 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>My New Hugo Site</title>
-    <link>https://example.org/</link>
-    <description>Recent content on My New Hugo Site</description>
-    <generator>Hugo</generator>
+    <title>My Hugo Site</title>
+    <link>https://example.com/</link>
+    <description>Recent content on My Hugo Site</description>
+    <generator>Hugo -- 0.147.9</generator>
     <language>en-us</language>
-    <atom:link href="https://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title></title>
-      <link>https://example.org/hybrid-cloud-analytics-pipeline/</link>
+      <link>https://example.com/hybrid-cloud-analytics-pipeline/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.org/hybrid-cloud-analytics-pipeline/</guid>
-      <description>&lt;h2 id=&#34;detailed-implementation-guide&#34;&gt;Detailed Implementation Guide&lt;/h2&gt;&#xA;&lt;p&gt;This document provides detailed, step-by-step implementation instructions for setting up a multi-cloud hybrid analytics platform with:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;On-prem MySQL/Vertica cluster&lt;/li&gt;&#xA;&lt;li&gt;Kubernetes bastion hosts in AWS (EKS), Azure (AKS), and GCP (GKE)&lt;/li&gt;&#xA;&lt;li&gt;Containerized Tableau Server on Kubernetes&lt;/li&gt;&#xA;&lt;li&gt;Data ingestion pipelines (Apache NiFi &amp;amp; Debezium/Kafka)&lt;/li&gt;&#xA;&lt;li&gt;Cloud data lakes (S3, ADLS Gen2, GCS)&lt;/li&gt;&#xA;&lt;li&gt;SQL-on-lake query engines (Athena, Synapse, BigQuery)&lt;/li&gt;&#xA;&lt;li&gt;API Gateway &amp;amp; transversal microservices (Kong/Envoy, Kafka, Chef, Redis)&lt;/li&gt;&#xA;&lt;li&gt;GitOps-driven CI/CD&lt;/li&gt;&#xA;&lt;li&gt;Monitoring, logging, and backup&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h3 id=&#34;1-prerequisites&#34;&gt;1. Prerequisites&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;On-Prem Environment:&lt;/strong&gt;&lt;/p&gt;</description>
+      <guid>https://example.com/hybrid-cloud-analytics-pipeline/</guid>
+      <description>&lt;h2 id=&#34;detailed-implementation-guide&#34;&gt;Detailed Implementation Guide&lt;/h2&gt;
+&lt;p&gt;This document provides detailed, step-by-step implementation instructions for setting up a multi-cloud hybrid analytics platform with:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;On-prem MySQL/Vertica cluster&lt;/li&gt;
+&lt;li&gt;Kubernetes bastion hosts in AWS (EKS), Azure (AKS), and GCP (GKE)&lt;/li&gt;
+&lt;li&gt;Containerized Tableau Server on Kubernetes&lt;/li&gt;
+&lt;li&gt;Data ingestion pipelines (Apache NiFi &amp;amp; Debezium/Kafka)&lt;/li&gt;
+&lt;li&gt;Cloud data lakes (S3, ADLS Gen2, GCS)&lt;/li&gt;
+&lt;li&gt;SQL-on-lake query engines (Athena, Synapse, BigQuery)&lt;/li&gt;
+&lt;li&gt;API Gateway &amp;amp; transversal microservices (Kong/Envoy, Kafka, Chef, Redis)&lt;/li&gt;
+&lt;li&gt;GitOps-driven CI/CD&lt;/li&gt;
+&lt;li&gt;Monitoring, logging, and backup&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;1-prerequisites&#34;&gt;1. Prerequisites&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;On-Prem Environment:&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title></title>
-      <link>https://example.org/hybrid-cloud-analytics-pipeline_1/</link>
+      <link>https://example.com/hybrid-cloud-analytics-pipeline_1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.org/hybrid-cloud-analytics-pipeline_1/</guid>
-      <description>&lt;h1 id=&#34;executive-brief-hybrid-multi-cloud-analytics-platform&#34;&gt;Executive Brief: Hybrid Multi-Cloud Analytics Platform&lt;/h1&gt;&#xA;&lt;p&gt;This brief provides a high-level overview of our proposed hybrid multi-cloud analytics solution. It is tailored for C‑level stakeholders, focusing on strategic value, architecture overview, implementation phases, and business benefits.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;1-business-challenges--objectives&#34;&gt;1. Business Challenges &amp;amp; Objectives&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;Challenges:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;Data Silos:&lt;/strong&gt; On-premise MySQL and Vertica clusters contain critical transactional and analytical data that is isolated from cloud-based analytics.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Scalability Limits:&lt;/strong&gt; Existing infrastructure struggles with peak workloads, leading to performance bottlenecks and slow dashboard refreshes.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Security &amp;amp; Compliance:&lt;/strong&gt; Ensuring data governance across on‑premise and multiple cloud environments adds complexity.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Multi-Cloud Strategy:&lt;/strong&gt; Need flexibility to avoid vendor lock‑in and leverage best-of-breed cloud services.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;&lt;strong&gt;Objectives:&lt;/strong&gt;&lt;/p&gt;</description>
+      <guid>https://example.com/hybrid-cloud-analytics-pipeline_1/</guid>
+      <description>&lt;h1 id=&#34;executive-brief-hybrid-multi-cloud-analytics-platform&#34;&gt;Executive Brief: Hybrid Multi-Cloud Analytics Platform&lt;/h1&gt;
+&lt;p&gt;This brief provides a high-level overview of our proposed hybrid multi-cloud analytics solution. It is tailored for C‑level stakeholders, focusing on strategic value, architecture overview, implementation phases, and business benefits.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;1-business-challenges--objectives&#34;&gt;1. Business Challenges &amp;amp; Objectives&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Challenges:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Data Silos:&lt;/strong&gt; On-premise MySQL and Vertica clusters contain critical transactional and analytical data that is isolated from cloud-based analytics.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Scalability Limits:&lt;/strong&gt; Existing infrastructure struggles with peak workloads, leading to performance bottlenecks and slow dashboard refreshes.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Security &amp;amp; Compliance:&lt;/strong&gt; Ensuring data governance across on‑premise and multiple cloud environments adds complexity.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Multi-Cloud Strategy:&lt;/strong&gt; Need flexibility to avoid vendor lock‑in and leverage best-of-breed cloud services.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Objectives:&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title></title>
-      <link>https://example.org/hybrid-cloud-analytics-pipeline_2/</link>
+      <link>https://example.com/hybrid-cloud-analytics-pipeline_2/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.org/hybrid-cloud-analytics-pipeline_2/</guid>
-      <description>&lt;h1 id=&#34;service-delivery-handbook-hybrid-multi-cloud-tableau-analytics-platform&#34;&gt;Service Delivery Handbook: Hybrid Multi-Cloud Tableau Analytics Platform&lt;/h1&gt;&#xA;&lt;p&gt;This handbook provides detailed step-by-step procedures for engineering and operations teams implementing the hybrid multi-cloud analytics solution. It covers infrastructure provisioning, networking, security, microservices deployment, data pipelines, and monitoring.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;table-of-contents&#34;&gt;Table of Contents&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Prerequisites &amp;amp; Environment Setup&lt;/li&gt;&#xA;&lt;li&gt;Networking &amp;amp; Connectivity&lt;/li&gt;&#xA;&lt;li&gt;Kubernetes Bastion Hosts&lt;/li&gt;&#xA;&lt;li&gt;API Gateway &amp;amp; Service Mesh&lt;/li&gt;&#xA;&lt;li&gt;Transversal Microservices (Kafka, Chef, Redis)&lt;/li&gt;&#xA;&lt;li&gt;Containerizing &amp;amp; Deploying Tableau&lt;/li&gt;&#xA;&lt;li&gt;Data Ingestion Pipelines&lt;/li&gt;&#xA;&lt;li&gt;Cloud Data Lake &amp;amp; Query Engine&lt;/li&gt;&#xA;&lt;li&gt;CI/CD &amp;amp; GitOps Automation&lt;/li&gt;&#xA;&lt;li&gt;Observability, Logging &amp;amp; Backup&lt;/li&gt;&#xA;&lt;li&gt;Operational Runbooks&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;1-prerequisites--environment-setup&#34;&gt;1. Prerequisites &amp;amp; Environment Setup&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;Accounts &amp;amp; Permissions&lt;/strong&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Ensure AWS, Azure, and GCP accounts with:&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Admin/API access for Terraform&lt;/li&gt;&#xA;&lt;li&gt;IAM roles/service principals preconfigured&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;On-prem credentials for MySQL and Vertica database admin&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Tooling&lt;/strong&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Install:&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Terraform v1.4+&lt;/li&gt;&#xA;&lt;li&gt;kubectl v1.26+&lt;/li&gt;&#xA;&lt;li&gt;Helm v3.9+&lt;/li&gt;&#xA;&lt;li&gt;Docker CLI v24+&lt;/li&gt;&#xA;&lt;li&gt;AWS CLI, Azure CLI, gcloud SDK&lt;/li&gt;&#xA;&lt;li&gt;Git, Vault CLI&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Code Repositories&lt;/strong&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Git repositories for:&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Infrastructure-as-Code (Terraform modules)&lt;/li&gt;&#xA;&lt;li&gt;Kubernetes manifests &amp;amp; Helm charts&lt;/li&gt;&#xA;&lt;li&gt;Data-pipeline configs (NiFi, Debezium)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;Branching strategy: &lt;code&gt;main&lt;/code&gt;, &lt;code&gt;dev&lt;/code&gt;, &lt;code&gt;feature/*&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Secret Management&lt;/strong&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Vault cluster with KV v2 mounted at &lt;code&gt;secret/data/hybrid-platform&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;Store DB credentials, cloud API tokens, TLS certs.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;2-networking--connectivity&#34;&gt;2. Networking &amp;amp; Connectivity&lt;/h2&gt;&#xA;&lt;h3 id=&#34;21-on-prem-to-cloud-vpn&#34;&gt;2.1 On-Prem to Cloud VPN&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;AWS VPN Setup&lt;/strong&gt; (similar for Azure ExpressRoute, GCP Interconnect):&lt;/p&gt;</description>
+      <guid>https://example.com/hybrid-cloud-analytics-pipeline_2/</guid>
+      <description>&lt;h1 id=&#34;service-delivery-handbook-hybrid-multi-cloud-tableau-analytics-platform&#34;&gt;Service Delivery Handbook: Hybrid Multi-Cloud Tableau Analytics Platform&lt;/h1&gt;
+&lt;p&gt;This handbook provides detailed step-by-step procedures for engineering and operations teams implementing the hybrid multi-cloud analytics solution. It covers infrastructure provisioning, networking, security, microservices deployment, data pipelines, and monitoring.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;table-of-contents&#34;&gt;Table of Contents&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Prerequisites &amp;amp; Environment Setup&lt;/li&gt;
+&lt;li&gt;Networking &amp;amp; Connectivity&lt;/li&gt;
+&lt;li&gt;Kubernetes Bastion Hosts&lt;/li&gt;
+&lt;li&gt;API Gateway &amp;amp; Service Mesh&lt;/li&gt;
+&lt;li&gt;Transversal Microservices (Kafka, Chef, Redis)&lt;/li&gt;
+&lt;li&gt;Containerizing &amp;amp; Deploying Tableau&lt;/li&gt;
+&lt;li&gt;Data Ingestion Pipelines&lt;/li&gt;
+&lt;li&gt;Cloud Data Lake &amp;amp; Query Engine&lt;/li&gt;
+&lt;li&gt;CI/CD &amp;amp; GitOps Automation&lt;/li&gt;
+&lt;li&gt;Observability, Logging &amp;amp; Backup&lt;/li&gt;
+&lt;li&gt;Operational Runbooks&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;1-prerequisites--environment-setup&#34;&gt;1. Prerequisites &amp;amp; Environment Setup&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Accounts &amp;amp; Permissions&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;Ensure AWS, Azure, and GCP accounts with:
+&lt;ul&gt;
+&lt;li&gt;Admin/API access for Terraform&lt;/li&gt;
+&lt;li&gt;IAM roles/service principals preconfigured&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;On-prem credentials for MySQL and Vertica database admin&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tooling&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;Install:
+&lt;ul&gt;
+&lt;li&gt;Terraform v1.4+&lt;/li&gt;
+&lt;li&gt;kubectl v1.26+&lt;/li&gt;
+&lt;li&gt;Helm v3.9+&lt;/li&gt;
+&lt;li&gt;Docker CLI v24+&lt;/li&gt;
+&lt;li&gt;AWS CLI, Azure CLI, gcloud SDK&lt;/li&gt;
+&lt;li&gt;Git, Vault CLI&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Code Repositories&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;Git repositories for:
+&lt;ul&gt;
+&lt;li&gt;Infrastructure-as-Code (Terraform modules)&lt;/li&gt;
+&lt;li&gt;Kubernetes manifests &amp;amp; Helm charts&lt;/li&gt;
+&lt;li&gt;Data-pipeline configs (NiFi, Debezium)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Branching strategy: &lt;code&gt;main&lt;/code&gt;, &lt;code&gt;dev&lt;/code&gt;, &lt;code&gt;feature/*&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Secret Management&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;Vault cluster with KV v2 mounted at &lt;code&gt;secret/data/hybrid-platform&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Store DB credentials, cloud API tokens, TLS certs.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2-networking--connectivity&#34;&gt;2. Networking &amp;amp; Connectivity&lt;/h2&gt;
+&lt;h3 id=&#34;21-on-prem-to-cloud-vpn&#34;&gt;2.1 On-Prem to Cloud VPN&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;AWS VPN Setup&lt;/strong&gt; (similar for Azure ExpressRoute, GCP Interconnect):&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    
-    <title>My New Hugo Site</title>
-    <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="description" content="Detailed Implementation Guide
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>My Hugo Site</title>
+<meta name="keywords" content="">
+<meta name="description" content="Detailed Implementation Guide
 This document provides detailed, step-by-step implementation instructions for setting up a multi-cloud hybrid analytics platform with:
 
 On-prem MySQL/Vertica cluster
@@ -24,103 +25,183 @@ Monitoring, logging, and backup
 
 
 On-Prem Environment:">
-    <meta name="generator" content="Hugo 0.147.9">
-    
-    
-    
-      <meta name="robots" content="index, follow">
-    
-    
+<meta name="author" content="">
+<link rel="canonical" href="https://example.com/hybrid-cloud-analytics-pipeline/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.8fe10233a706bc87f2e08b3cf97b8bd4c0a80f10675a143675d59212121037c0.css" integrity="sha256-j&#43;ECM6cGvIfy4Is8&#43;XuL1MCoDxBnWhQ2ddWSEhIQN8A=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://example.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://example.com/hybrid-cloud-analytics-pipeline/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
-    
-<link rel="stylesheet" href="/ananke/css/main.min.8d048772ae72ab11245a0e296d1f2a36d3e3dd376c6c867394d6cc659c68fc37.css" >
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
 
+            .list {
+                background: var(--theme);
+            }
 
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
 
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
 
-    
-
-
-    
-      
-
-    
-
-    
-
-    
-      <link rel="canonical" href="https://example.org/hybrid-cloud-analytics-pipeline/">
-    
-
-    <meta property="og:url" content="https://example.org/hybrid-cloud-analytics-pipeline/">
-  <meta property="og:site_name" content="My New Hugo Site">
-  <meta property="og:title" content="My New Hugo Site">
+    </style>
+</noscript><meta property="og:url" content="https://example.com/hybrid-cloud-analytics-pipeline/">
+  <meta property="og:site_name" content="My Hugo Site">
+  <meta property="og:title" content="My Hugo Site">
   <meta property="og:description" content="Detailed Implementation Guide This document provides detailed, step-by-step implementation instructions for setting up a multi-cloud hybrid analytics platform with:
 On-prem MySQL/Vertica cluster Kubernetes bastion hosts in AWS (EKS), Azure (AKS), and GCP (GKE) Containerized Tableau Server on Kubernetes Data ingestion pipelines (Apache NiFi &amp; Debezium/Kafka) Cloud data lakes (S3, ADLS Gen2, GCS) SQL-on-lake query engines (Athena, Synapse, BigQuery) API Gateway &amp; transversal microservices (Kong/Envoy, Kafka, Chef, Redis) GitOps-driven CI/CD Monitoring, logging, and backup 1. Prerequisites On-Prem Environment:">
-  <meta property="og:locale" content="en_us">
+  <meta property="og:locale" content="en-us">
   <meta property="og:type" content="article">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="">
+<meta name="twitter:description" content="Detailed Implementation Guide
+This document provides detailed, step-by-step implementation instructions for setting up a multi-cloud hybrid analytics platform with:
 
-  <meta itemprop="name" content="My New Hugo Site">
-  <meta itemprop="description" content="Detailed Implementation Guide This document provides detailed, step-by-step implementation instructions for setting up a multi-cloud hybrid analytics platform with:
-On-prem MySQL/Vertica cluster Kubernetes bastion hosts in AWS (EKS), Azure (AKS), and GCP (GKE) Containerized Tableau Server on Kubernetes Data ingestion pipelines (Apache NiFi &amp; Debezium/Kafka) Cloud data lakes (S3, ADLS Gen2, GCS) SQL-on-lake query engines (Athena, Synapse, BigQuery) API Gateway &amp; transversal microservices (Kong/Envoy, Kafka, Chef, Redis) GitOps-driven CI/CD Monitoring, logging, and backup 1. Prerequisites On-Prem Environment:">
-  <meta itemprop="wordCount" content="690">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="My New Hugo Site">
-  <meta name="twitter:description" content="Detailed Implementation Guide This document provides detailed, step-by-step implementation instructions for setting up a multi-cloud hybrid analytics platform with:
-On-prem MySQL/Vertica cluster Kubernetes bastion hosts in AWS (EKS), Azure (AKS), and GCP (GKE) Containerized Tableau Server on Kubernetes Data ingestion pipelines (Apache NiFi &amp; Debezium/Kafka) Cloud data lakes (S3, ADLS Gen2, GCS) SQL-on-lake query engines (Athena, Synapse, BigQuery) API Gateway &amp; transversal microservices (Kong/Envoy, Kafka, Chef, Redis) GitOps-driven CI/CD Monitoring, logging, and backup 1. Prerequisites On-Prem Environment:">
+On-prem MySQL/Vertica cluster
+Kubernetes bastion hosts in AWS (EKS), Azure (AKS), and GCP (GKE)
+Containerized Tableau Server on Kubernetes
+Data ingestion pipelines (Apache NiFi &amp; Debezium/Kafka)
+Cloud data lakes (S3, ADLS Gen2, GCS)
+SQL-on-lake query engines (Athena, Synapse, BigQuery)
+API Gateway &amp; transversal microservices (Kong/Envoy, Kafka, Chef, Redis)
+GitOps-driven CI/CD
+Monitoring, logging, and backup
 
-      
+
+1. Prerequisites
+
+
+On-Prem Environment:">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "",
+      "item": "https://example.com/hybrid-cloud-analytics-pipeline/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "",
+  "name": "",
+  "description": "Detailed Implementation Guide This document provides detailed, step-by-step implementation instructions for setting up a multi-cloud hybrid analytics platform with:\nOn-prem MySQL/Vertica cluster Kubernetes bastion hosts in AWS (EKS), Azure (AKS), and GCP (GKE) Containerized Tableau Server on Kubernetes Data ingestion pipelines (Apache NiFi \u0026amp; Debezium/Kafka) Cloud data lakes (S3, ADLS Gen2, GCS) SQL-on-lake query engines (Athena, Synapse, BigQuery) API Gateway \u0026amp; transversal microservices (Kong/Envoy, Kafka, Chef, Redis) GitOps-driven CI/CD Monitoring, logging, and backup 1. Prerequisites On-Prem Environment:\n",
+  "keywords": [
     
-	
-  </head><body class="ma0 avenir bg-near-white production">
+  ],
+  "articleBody": "Detailed Implementation Guide This document provides detailed, step-by-step implementation instructions for setting up a multi-cloud hybrid analytics platform with:\nOn-prem MySQL/Vertica cluster Kubernetes bastion hosts in AWS (EKS), Azure (AKS), and GCP (GKE) Containerized Tableau Server on Kubernetes Data ingestion pipelines (Apache NiFi \u0026 Debezium/Kafka) Cloud data lakes (S3, ADLS Gen2, GCS) SQL-on-lake query engines (Athena, Synapse, BigQuery) API Gateway \u0026 transversal microservices (Kong/Envoy, Kafka, Chef, Redis) GitOps-driven CI/CD Monitoring, logging, and backup 1. Prerequisites On-Prem Environment:\nMySQL v8+ with binlog enabled (for CDC) Vertica v10+ accessible via JDBC Network firewall rules allowing outbound to cloud VPN endpoints Cloud Accounts:\nAWS, Azure, GCP accounts with permissions to create VPCs/VNets, K8s clusters, IAM roles, storage Tools Installed Locally:\nTerraform v1.4+ kubectl v1.25+ Helm v3.8+ AWS CLI, Azure CLI, gcloud SDK Git 2. Networking \u0026 VPN Setup 2.1 AWS Site-to-Site VPN # terraform/aws/vpn.tf provider \"aws\" { region = var.aws_region } resource \"aws_vpc\" \"main\" { cidr_block = \"10.0.0.0/16\" tags = { Name = \"hybrid-vpc\" } } resource \"aws_customer_gateway\" \"onprem\" { bgp_asn = 65000 ip_address = var.onprem_static_ip type = \"ipsec.1\" } resource \"aws_vpn_gateway\" \"vgw\" { vpc_id = aws_vpc.main.id tags = { Name = \"vgw\" } } resource \"aws_vpn_connection\" \"vpn\" { customer_gateway_id = aws_customer_gateway.onprem.id vpn_gateway_id = aws_vpn_gateway.vgw.id type = \"ipsec.1\" static_routes_only = true } resource \"aws_vpn_connection_route\" \"route\" { count = length(var.onprem_cidrs) vpn_connection_id = aws_vpn_connection.vpn.id destination_cidr_block = var.onprem_cidrs[count.index] } 2.2 Azure \u0026 GCP Connectivity Use azurerm_virtual_network_gateway, azurerm_local_network_gateway, and azurerm_virtual_network_gateway_connection for Azure. Use google_compute_vpn_gateway, google_compute_vpn_tunnel in Terraform for GCP. 3. Kubernetes Cluster Provisioning 3.1 AWS EKS with Terraform # terraform/aws/eks.tf module \"eks\" { source = \"terraform-aws-modules/eks/aws\" cluster_name = \"hybrid-eks\" cluster_version = \"1.25\" subnets = aws_subnet.private.*.id node_groups = { bastion = { desired_capacity = 1 instance_type = \"t3.small\" labels = { role = \"bastion\" } ssh_key_name = var.ssh_key } worker = { desired_capacity = 2 instance_type = \"t3.medium\" labels = { role = \"app\" } } } } 3.2 Azure AKS # terraform/azure/aks.tf resource \"azurerm_kubernetes_cluster\" \"aks\" { name = \"hybrid-aks\" location = var.azure_region resource_group_name = azurerm_resource_group.rg.name dns_prefix = \"hybrid\" default_node_pool { name = \"nodepool\" node_count = 3 vm_size = \"Standard_DS2_v2\" } identity { type = \"SystemAssigned\" } } 3.3 GCP GKE # terraform/gcp/gke.tf resource \"google_container_cluster\" \"gke\" { name = \"hybrid-gke\" location = var.gcp_region initial_node_count = 3 network = google_compute_network.vpc.self_link subnetwork = google_compute_subnetwork.subnet.self_link node_config { machine_type = \"e2-medium\" oauth_scopes = [\"https://www.googleapis.com/auth/cloud-platform\"] } } 4. Bastion Setup \u0026 SSH Access Label bastion nodes: kubectl label nodes -l role=bastion bastion=true. Deploy SSH DaemonSet: apiVersion: apps/v1 kind: DaemonSet metadata: name: ssh-bastion namespace: kube-system spec: selector: matchLabels: app: ssh-bastion template: metadata: labels: app: ssh-bastion spec: nodeSelector: bastion: \"true\" containers: - name: sshd image: linuxserver/openssh-server env: - name: PUID value: \"1000\" - name: PGID value: \"1000\" - name: TZ value: \"UTC\" - name: PUBLIC_KEY valueFrom: secretKeyRef: name: ssh-keys key: public ports: - containerPort: 22 hostPort: 22 tolerations: - key: \"node-role.kubernetes.io/master\" operator: \"Exists\" effect: \"NoSchedule\" Create ssh-keys secret with your public key. 5. API Gateway \u0026 Transversal Microservices To provide unified ingress, routing, and shared services across clouds:\n5.1 API Gateway (Kong + Envoy) Deploy Kong Gateway via Helm: helm repo add kong https://charts.konghq.com helm install kong-gateway kong/kong \\ --namespace kong-system --create-namespace \\ --set ingressController.installCRDs=true Expose Gateway with a LoadBalancer service. Configure DNS for a common API endpoint per cloud. Envoy Sidecar (optional) via Istio/Linkerd for mTLS and advanced routing. 5.2 Kafka (Strimzi Operator) Install Strimzi: kubectl create namespace kafka helm repo add strimzi https://strimzi.io/charts/ helm install strimzi-kafka strimzi/strimzi-kafka-operator --namespace kafka Kafka Cluster CR: apiVersion: kafka.strimzi.io/v1beta2 kind: Kafka metadata: name: hybrid-kafka namespace: kafka spec: kafka: replicas: 3 listeners: - name: plain port: 9092 type: internal storage: type: ephemeral zookeeper: replicas: 3 storage: type: ephemeral entityOperator: {} 5.3 Chef (Configuration Management) Deploy Chef Server container: kubectl create namespace chef kubectl apply -f https://raw.githubusercontent.com/chef/chef-server/master/deploy/k8s/chef-server-deployment.yaml Bootstrap Nodes: use knife bootstrap to register Kubernetes nodes and on-prem VMs. Cookbooks \u0026 Policies: store in Git and automate via Chef Automate. 5.4 Redis (Caching \u0026 Session Store) Install Redis via Bitnami Helm chart: helm repo add bitnami https://charts.bitnami.com/bitnami helm install redis-cache bitnami/redis --namespace data-services Access: expose internally via ClusterIP; restrict with NetworkPolicies. Use Cases: caching query results, session tokens, leaderboards for dashboard metadata. 6. Containerizing \u0026 Deploying Tableau Server (next sections…)\n",
+  "wordCount" : "690",
+  "inLanguage": "en",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://example.com/hybrid-cloud-analytics-pipeline/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "My Hugo Site",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://example.com/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
 
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://example.com/" accesskey="h" title="My Hugo Site (Alt + H)">My Hugo Site</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
     
-   
-  
+    <h1 class="post-title entry-hint-parent">
+      
+    </h1>
+    <div class="post-meta">4 min
 
-  <header>
-    <div class="bg-black">
-      <nav class="pv3 ph3 ph4-ns" role="navigation">
-  <div class="flex-l center items-center justify-between">
-    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
-      
-        My New Hugo Site
-      
-    </a>
-    <div class="flex-l items-center">
-      
-
-      
-      <div class="ananke-socials"></div>
-
-    </div>
-  </div>
-</nav>
-
-    </div>
-  </header>
-
-
-
-    <main class="pb7" role="main">
-      
-  
-  
-  <article class="flex-l mw8 center ph3 flex-wrap justify-between">
-    <header class="mt4 w-100">
-      <aside class="instapaper_ignoref b helvetica tracked ttu">
-          
-        My New Hugo Site
-      </aside><div id="sharing" class="mt3 ananke-socials"></div>
-<h1 class="f1 athelas mt3 mb1"></h1>
-      
-      
-      
-
-      
-      
-    </header>
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h2 id="detailed-implementation-guide">Detailed Implementation Guide</h2>
+</div>
+  </header> 
+  <div class="post-content"><h2 id="detailed-implementation-guide">Detailed Implementation Guide<a hidden class="anchor" aria-hidden="true" href="#detailed-implementation-guide">#</a></h2>
 <p>This document provides detailed, step-by-step implementation instructions for setting up a multi-cloud hybrid analytics platform with:</p>
 <ul>
 <li>On-prem MySQL/Vertica cluster</li>
@@ -134,7 +215,7 @@ On-prem MySQL/Vertica cluster Kubernetes bastion hosts in AWS (EKS), Azure (AKS)
 <li>Monitoring, logging, and backup</li>
 </ul>
 <hr>
-<h3 id="1-prerequisites">1. Prerequisites</h3>
+<h3 id="1-prerequisites">1. Prerequisites<a hidden class="anchor" aria-hidden="true" href="#1-prerequisites">#</a></h3>
 <ol>
 <li>
 <p><strong>On-Prem Environment:</strong></p>
@@ -162,8 +243,8 @@ On-prem MySQL/Vertica cluster Kubernetes bastion hosts in AWS (EKS), Azure (AKS)
 </li>
 </ol>
 <hr>
-<h3 id="2-networking--vpn-setup">2. Networking &amp; VPN Setup</h3>
-<h4 id="21-aws-site-to-site-vpn">2.1 AWS Site-to-Site VPN</h4>
+<h3 id="2-networking--vpn-setup">2. Networking &amp; VPN Setup<a hidden class="anchor" aria-hidden="true" href="#2-networking--vpn-setup">#</a></h3>
+<h4 id="21-aws-site-to-site-vpn">2.1 AWS Site-to-Site VPN<a hidden class="anchor" aria-hidden="true" href="#21-aws-site-to-site-vpn">#</a></h4>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-hcl" data-lang="hcl"><span style="display:flex;"><span><span style="color:#75715e"># terraform/aws/vpn.tf
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">provider</span> <span style="color:#e6db74">&#34;aws&#34;</span> {
 </span></span><span style="display:flex;"><span>  region <span style="color:#f92672">=</span> <span style="color:#66d9ef">var</span>.<span style="color:#66d9ef">aws_region</span>
@@ -197,14 +278,14 @@ On-prem MySQL/Vertica cluster Kubernetes bastion hosts in AWS (EKS), Azure (AKS)
 </span></span><span style="display:flex;"><span>  vpn_connection_id    <span style="color:#f92672">=</span> <span style="color:#66d9ef">aws_vpn_connection</span>.<span style="color:#66d9ef">vpn</span>.<span style="color:#66d9ef">id</span>
 </span></span><span style="display:flex;"><span>  destination_cidr_block <span style="color:#f92672">=</span> <span style="color:#66d9ef">var</span>.<span style="color:#66d9ef">onprem_cidrs</span>[<span style="color:#66d9ef">count</span>.<span style="color:#66d9ef">index</span>]
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h4 id="22-azure--gcp-connectivity">2.2 Azure &amp; GCP Connectivity</h4>
+</span></span></code></pre></div><h4 id="22-azure--gcp-connectivity">2.2 Azure &amp; GCP Connectivity<a hidden class="anchor" aria-hidden="true" href="#22-azure--gcp-connectivity">#</a></h4>
 <ul>
 <li>Use <code>azurerm_virtual_network_gateway</code>, <code>azurerm_local_network_gateway</code>, and <code>azurerm_virtual_network_gateway_connection</code> for Azure.</li>
 <li>Use <code>google_compute_vpn_gateway</code>, <code>google_compute_vpn_tunnel</code> in Terraform for GCP.</li>
 </ul>
 <hr>
-<h3 id="3-kubernetes-cluster-provisioning">3. Kubernetes Cluster Provisioning</h3>
-<h4 id="31-aws-eks-with-terraform">3.1 AWS EKS with Terraform</h4>
+<h3 id="3-kubernetes-cluster-provisioning">3. Kubernetes Cluster Provisioning<a hidden class="anchor" aria-hidden="true" href="#3-kubernetes-cluster-provisioning">#</a></h3>
+<h4 id="31-aws-eks-with-terraform">3.1 AWS EKS with Terraform<a hidden class="anchor" aria-hidden="true" href="#31-aws-eks-with-terraform">#</a></h4>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-hcl" data-lang="hcl"><span style="display:flex;"><span><span style="color:#75715e"># terraform/aws/eks.tf
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">module</span> <span style="color:#e6db74">&#34;eks&#34;</span> {
 </span></span><span style="display:flex;"><span>  source          <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;terraform-aws-modules/eks/aws&#34;</span>
@@ -226,7 +307,7 @@ On-prem MySQL/Vertica cluster Kubernetes bastion hosts in AWS (EKS), Azure (AKS)
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h4 id="32-azure-aks">3.2 Azure AKS</h4>
+</span></span></code></pre></div><h4 id="32-azure-aks">3.2 Azure AKS<a hidden class="anchor" aria-hidden="true" href="#32-azure-aks">#</a></h4>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-hcl" data-lang="hcl"><span style="display:flex;"><span><span style="color:#75715e"># terraform/azure/aks.tf
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;azurerm_kubernetes_cluster&#34; &#34;aks&#34;</span> {
 </span></span><span style="display:flex;"><span>  name                <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hybrid-aks&#34;</span>
@@ -244,7 +325,7 @@ On-prem MySQL/Vertica cluster Kubernetes bastion hosts in AWS (EKS), Azure (AKS)
 </span></span><span style="display:flex;"><span>    type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;SystemAssigned&#34;</span>
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h4 id="33-gcp-gke">3.3 GCP GKE</h4>
+</span></span></code></pre></div><h4 id="33-gcp-gke">3.3 GCP GKE<a hidden class="anchor" aria-hidden="true" href="#33-gcp-gke">#</a></h4>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-hcl" data-lang="hcl"><span style="display:flex;"><span><span style="color:#75715e"># terraform/gcp/gke.tf
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;google_container_cluster&#34; &#34;gke&#34;</span> {
 </span></span><span style="display:flex;"><span>  name               <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hybrid-gke&#34;</span>
@@ -260,7 +341,7 @@ On-prem MySQL/Vertica cluster Kubernetes bastion hosts in AWS (EKS), Azure (AKS)
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><hr>
-<h3 id="4-bastion-setup--ssh-access">4. Bastion Setup &amp; SSH Access</h3>
+<h3 id="4-bastion-setup--ssh-access">4. Bastion Setup &amp; SSH Access<a hidden class="anchor" aria-hidden="true" href="#4-bastion-setup--ssh-access">#</a></h3>
 <ol>
 <li>Label bastion nodes: <code>kubectl label nodes -l role=bastion bastion=true</code>.</li>
 <li>Deploy SSH DaemonSet:</li>
@@ -307,9 +388,9 @@ On-prem MySQL/Vertica cluster Kubernetes bastion hosts in AWS (EKS), Azure (AKS)
 <li>Create <code>ssh-keys</code> secret with your public key.</li>
 </ol>
 <hr>
-<h3 id="5-api-gateway--transversal-microservices">5. API Gateway &amp; Transversal Microservices</h3>
+<h3 id="5-api-gateway--transversal-microservices">5. API Gateway &amp; Transversal Microservices<a hidden class="anchor" aria-hidden="true" href="#5-api-gateway--transversal-microservices">#</a></h3>
 <p>To provide unified ingress, routing, and shared services across clouds:</p>
-<h4 id="51-api-gateway-kong--envoy">5.1 API Gateway (Kong + Envoy)</h4>
+<h4 id="51-api-gateway-kong--envoy">5.1 API Gateway (Kong + Envoy)<a hidden class="anchor" aria-hidden="true" href="#51-api-gateway-kong--envoy">#</a></h4>
 <ol>
 <li><strong>Deploy Kong Gateway</strong> via Helm:
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm repo add kong https://charts.konghq.com
@@ -320,7 +401,7 @@ On-prem MySQL/Vertica cluster Kubernetes bastion hosts in AWS (EKS), Azure (AKS)
 <li><strong>Expose Gateway</strong> with a LoadBalancer service. Configure DNS for a common API endpoint per cloud.</li>
 <li><strong>Envoy Sidecar</strong> (optional) via Istio/Linkerd for mTLS and advanced routing.</li>
 </ol>
-<h4 id="52-kafka-strimzi-operator">5.2 Kafka (Strimzi Operator)</h4>
+<h4 id="52-kafka-strimzi-operator">5.2 Kafka (Strimzi Operator)<a hidden class="anchor" aria-hidden="true" href="#52-kafka-strimzi-operator">#</a></h4>
 <ol>
 <li><strong>Install Strimzi</strong>:
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create namespace kafka
@@ -349,7 +430,7 @@ On-prem MySQL/Vertica cluster Kubernetes bastion hosts in AWS (EKS), Azure (AKS)
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">entityOperator</span>: {}
 </span></span></code></pre></div></li>
 </ol>
-<h4 id="53-chef-configuration-management">5.3 Chef (Configuration Management)</h4>
+<h4 id="53-chef-configuration-management">5.3 Chef (Configuration Management)<a hidden class="anchor" aria-hidden="true" href="#53-chef-configuration-management">#</a></h4>
 <ol>
 <li><strong>Deploy Chef Server</strong> container:
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create namespace chef
@@ -358,7 +439,7 @@ On-prem MySQL/Vertica cluster Kubernetes bastion hosts in AWS (EKS), Azure (AKS)
 <li><strong>Bootstrap Nodes</strong>: use <code>knife bootstrap</code> to register Kubernetes nodes and on-prem VMs.</li>
 <li><strong>Cookbooks &amp; Policies</strong>: store in Git and automate via Chef Automate.</li>
 </ol>
-<h4 id="54-redis-caching--session-store">5.4 Redis (Caching &amp; Session Store)</h4>
+<h4 id="54-redis-caching--session-store">5.4 Redis (Caching &amp; Session Store)<a hidden class="anchor" aria-hidden="true" href="#54-redis-caching--session-store">#</a></h4>
 <ol>
 <li><strong>Install Redis</strong> via Bitnami Helm chart:
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm repo add bitnami https://charts.bitnami.com/bitnami
@@ -368,36 +449,135 @@ On-prem MySQL/Vertica cluster Kubernetes bastion hosts in AWS (EKS), Azure (AKS)
 <li><strong>Use Cases</strong>: caching query results, session tokens, leaderboards for dashboard metadata.</li>
 </ol>
 <hr>
-<h3 id="6-containerizing--deploying-tableau-server">6. Containerizing &amp; Deploying Tableau Server</h3>
+<h3 id="6-containerizing--deploying-tableau-server">6. Containerizing &amp; Deploying Tableau Server<a hidden class="anchor" aria-hidden="true" href="#6-containerizing--deploying-tableau-server">#</a></h3>
 <p><em>(next sections…)</em></p>
-<ul class="pa0">
-  
-</ul>
-<div class="mt6 instapaper_ignoref">
-      
-      
-      </div>
-    </div>
-
-    <aside class="w-30-l mt6-l">
 
 
-
-
-</aside>
-
-  </article>
-
-    </main>
-    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
-  <div class="flex justify-between">
-  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="https://example.org/" >
-    &copy;  My New Hugo Site 2025 
-  </a>
-    <div><div class="ananke-socials"></div>
-</div>
   </div>
-</footer>
 
-  </body>
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="https://example.com/">My Hugo Site</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
 </html>

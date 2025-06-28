@@ -1,3 +1,6 @@
 [submodule "data/my-website/themes/ananke"]
 	path = data/my-website/themes/ananke
 	url = https://github.com/theNewDynamic/gohugo-theme-ananke
+[submodule "data/my-website/themes/PaperMod"]
+	path = data/my-website/themes/PaperMod
+	url = https://github.com/adityatelange/hugo-PaperMod
